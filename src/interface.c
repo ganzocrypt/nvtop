@@ -501,6 +501,7 @@ static void draw_devices(
       snprintf(buff, 1024, "N/A");
       draw_bare_percentage(dev->mem_util, "MEM-Util", 0, buff);
     }
+    /*
     if (IS_VALID(encoder_rate_valid, dinfo->valid)) {
       snprintf(buff, 1024, "%u%%", dinfo->encoder_rate);
       draw_bare_percentage(dev->encode_util, "Encoder",
@@ -519,13 +520,14 @@ static void draw_devices(
       snprintf(buff, 1024, "N/A");
       draw_bare_percentage(dev->decode_util, "Decoder", 0, buff);
     }
+    */
     if (IS_VALID(gpu_temp_valid         , dinfo->valid) &&
         IS_VALID(gpu_temp_slowdown_valid, dinfo->valid))
       draw_temp_color(dev->temperature,
           dinfo->gpu_temp,
           dinfo->gpu_temp_slowdown);
     else {
-      mvwprintw(dev->temperature, 0, 0, "TEMP N/A°C");
+      mvwprintw(dev->temperature, 0, 0, "TEMP N/A C");
       wnoutrefresh(dev->temperature);
     }
 
