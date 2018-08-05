@@ -461,9 +461,12 @@ static void draw_devices(
     struct nvtop_interface *interface) {
 
   unsigned int num_devices = interface->num_devices;
+  unsigned int total_gpu_power = 0;
+  
   for (unsigned int i = 0; i < num_devices; ++i) {
     struct device_window *dev = &interface->devices_win[i];
     struct device_info *dinfo = &dev_info[i];
+    
     if (dev->device_name == NULL) {
       size_t namelen = strlen(dinfo->device_name) + 1;
       dev->device_name = malloc(namelen);
@@ -565,15 +568,17 @@ static void draw_devices(
     // POWER
     werase(dev->power_info);
     if (IS_VALID(power_draw_valid    , dinfo->valid) &&
-        IS_VALID(power_draw_max_valid, dinfo->valid))
+        IS_VALID(power_draw_max_valid, dinfo->valid)) {
       mvwprintw(dev->power_info, 0, 0,
           "POW %3u / %3u W",
           dinfo->power_draw / 1000, dinfo->power_draw_max / 1000);
-    else
+      //calculate the total power draw for the total number of devices
+      total_gpu_power = total_gpu_power + dinfo->power_draw;
+    } else {
       mvwprintw(dev->power_info, 0, 0, "POW N/A W");
-    mvwchgat(dev->power_info, 0, 0, 3, 0, cyan_color, NULL);
-    wnoutrefresh(dev->power_info);
-
+      mvwchgat(dev->power_info, 0, 0, 3, 0, cyan_color, NULL);
+      wnoutrefresh(dev->power_info);
+    }
     // PICe throughput
     werase(dev->pcie_info);
     wattron(dev->pcie_info, COLOR_PAIR(cyan_color));
@@ -605,8 +610,18 @@ static void draw_devices(
       wprintw(dev->pcie_info, "N/A");
 
     wnoutrefresh(dev->pcie_info);
+    
+  }// end of for loop for gpu devices
+  
+  //Print number of GPUs and their Power Consumption
+  if (dev->device_name == NULL) {
+    wattron(dev->name_win, COLOR_PAIR(cyan_color));
+    mvwprintw(dev->name_win, 0, 0, "Device: %-2u", num_devices);
+    mvwprintw(dev->name_win, 0, 0, "Total Power Consumption: %-2u", total_gpu_power, " Watts");
+    wnoutrefresh(dev->name_win);
   }
 }
+
 
 static inline unsigned int max_val(unsigned int a, unsigned int b) {
   return a > b ? a : b;
