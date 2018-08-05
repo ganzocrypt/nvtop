@@ -573,8 +573,6 @@ static void draw_devices(
       mvwprintw(dev->power_info, 0, 0,
           "POW %3u / %3u W",
           dinfo->power_draw / 1000, dinfo->power_draw_max / 1000);
-      //calculate the total power draw for the total number of devices
-      total_gpu_power = total_gpu_power + dinfo->power_draw;
     else
       mvwprintw(dev->power_info, 0, 0, "POW N/A W");
       mvwchgat(dev->power_info, 0, 0, 3, 0, cyan_color, NULL);
@@ -612,6 +610,8 @@ static void draw_devices(
 
     wnoutrefresh(dev->pcie_info);
     
+    //calculate the total power draw for the total number of devices
+    total_gpu_power = total_gpu_power + dinfo->power_draw;
     //Print number of GPUs and their Power Consumption
     if (IS_VALID(power_draw_valid    , dinfo->valid) && i == (num_devices - 1)) {
       wattron(dev->power_info, COLOR_PAIR(cyan_color));
