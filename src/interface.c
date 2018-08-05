@@ -539,10 +539,10 @@ static void draw_devices(
 
     // FAN
     if (IS_VALID(fan_speed_valid, dinfo->valid))
-      mvwprintw(dev->fan_speed, 0, 0, "FAN %3u%%", dinfo->fan_speed);
+      mvwprintw(dev->fan_speed, 0, 0, "FAN%3u%%", dinfo->fan_speed);
     else
       mvwprintw(dev->fan_speed, 0, 0, "FAN N/A%%");
-    mvwchgat(dev->fan_speed, 0, 0, 3, 0, cyan_color, NULL);
+    //mvwchgat(dev->fan_speed, 0, 0, 3, 0, cyan_color, NULL);
     wnoutrefresh(dev->fan_speed);
 
     // GPU CLOCK
