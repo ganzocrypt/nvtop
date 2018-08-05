@@ -575,7 +575,7 @@ static void draw_devices(
       mvwprintw(dev->power_info, 0, 0, "POW %3u / %3uW", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000);
       //Print number of GPUs and their Power Consumption
       total_gpu_power = total_gpu_power + dinfo->power_draw / 1000;
-      mvwprintw(dev->power_info, 0, 0, "GPUs %3u T-Pow %3u W", num_devices, total_gpu_power);
+      mvwprintw(dev->power_info, 0, 0, "TPOW %3uW", total_gpu_power);
     }
     else
       mvwprintw(dev->power_info, 0, 0, "POW N/A W");
