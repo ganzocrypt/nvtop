@@ -616,7 +616,7 @@ static void draw_devices(
   //Print number of GPUs and their Power Consumption
   if (dev->device_name == NULL) {
     wattron(dev->name_win, COLOR_PAIR(cyan_color));
-    mvwprintw(dev->name_win, 0, 0, "Device: %-2u", num_devices);
+    mvwprintw(dev->name_win, 0, 0, "Total number of GPUs: %-2u", num_devices);
     mvwprintw(dev->name_win, 0, 0, "Total Power Consumption: %-2u", total_gpu_power, " Watts");
     wnoutrefresh(dev->name_win);
   }
