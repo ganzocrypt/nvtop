@@ -467,6 +467,7 @@ static void draw_devices(
     struct device_window *dev = &interface->devices_win[i];
     struct device_info *dinfo = &dev_info[i];
     
+    
     if (dev->device_name == NULL) {
       size_t namelen = strlen(dinfo->device_name) + 1;
       dev->device_name = malloc(namelen);
@@ -611,16 +612,14 @@ static void draw_devices(
 
     wnoutrefresh(dev->pcie_info);
     
+    //Print number of GPUs and their Power Consumption
+    if (dev->device_name == NULL && i == num_devices - 1) {
+      wattron(dev->name_win, COLOR_PAIR(cyan_color));
+      mvwprintw(dev->name_win, 0, 0, "Total number of GPUs: %-2u", num_devices);
+      mvwprintw(dev->name_win, 0, 0, "Total Power Consumption: %-2u", total_gpu_power, " Watts");
+      wnoutrefresh(dev->name_win);
+    }
   }// end of for loop for gpu devices
-  
-  struct device_window *dev = &interface->devices_win[num_devices];
-  //Print number of GPUs and their Power Consumption
-  if (dev->device_name == NULL) {
-    wattron(dev->name_win, COLOR_PAIR(cyan_color));
-    mvwprintw(dev->name_win, 0, 0, "Total number of GPUs: %-2u", num_devices);
-    mvwprintw(dev->name_win, 0, 0, "Total Power Consumption: %-2u", total_gpu_power, " Watts");
-    wnoutrefresh(dev->name_win);
-  }
 }
 
 
