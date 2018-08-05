@@ -615,14 +615,14 @@ static void draw_devices(
 
     wnoutrefresh(dev->pcie_info);
     
-    
-  }// end of for loop for gpu devices
-  //Print number of GPUs and their Power Consumption
-
-    if (num_devices != 0)) {
+    if (i == num_devices - 1) {
       wattron(dev->power_info, COLOR_PAIR(cyan_color));
       mvwprintw(dev->power_info, 0, 0, "GPUs %3u T-Pow %3u W", num_devices, total_gpu_power);
     }
+  }// end of for loop for gpu devices
+  //Print number of GPUs and their Power Consumption
+
+    
 }
 
 
