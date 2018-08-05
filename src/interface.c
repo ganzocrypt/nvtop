@@ -425,7 +425,7 @@ static const char* memory_prefix[] = { "B", "k", "M", "G", "T", "P" };
 static void draw_temp_color(WINDOW *win,
     unsigned int temp,
     unsigned int temp_slowdown) {
-  mvwprintw(win, 0, 0, "TEMP %3u C", temp);
+  mvwprintw(win, 0, 0, "TEMP %3uC", temp);
   if (temp >= temp_slowdown - 5) {
     if (temp >= temp_slowdown)
       mvwchgat(win, 0, 5, 3, 0, red_color, NULL);
@@ -506,15 +506,7 @@ static void draw_devices(
       draw_bare_percentage(dev->mem_util, "MEM-Util", 0, buff);
     }
     
-    //Print number of GPUs and their Power Consumption
-    werase(dev->power_info);
-    if (IS_VALID(power_draw_valid    , dinfo->valid) && i == (num_devices - 1)) {
-      //calculate the total power draw for the total number of devices
-      total_gpu_power = total_gpu_power + dinfo->power_draw;
-      wattron(dev->power_info, COLOR_PAIR(cyan_color));
-      mvwprintw(dev->power_info, 0, 0, "GPUs %3u T-Pow %3u W", num_devices, total_gpu_power);
-      wnoutrefresh(dev->power_info);
-    }
+    
     /*
     if (IS_VALID(encoder_rate_valid, dinfo->valid)) {
       snprintf(buff, 1024, "%u%%", dinfo->encoder_rate);
@@ -588,6 +580,9 @@ static void draw_devices(
       mvwchgat(dev->power_info, 0, 0, 3, 0, cyan_color, NULL);
       wnoutrefresh(dev->power_info);
     
+    //calculate the total power draw for the total number of devices
+    total_gpu_power = total_gpu_power + dinfo->power_draw;
+    
     // PICe throughput
     werase(dev->pcie_info);
     wattron(dev->pcie_info, COLOR_PAIR(cyan_color));
@@ -622,6 +617,12 @@ static void draw_devices(
     
     
   }// end of for loop for gpu devices
+  //Print number of GPUs and their Power Consumption
+
+    if (num_devices != 0)) {
+      wattron(dev->power_info, COLOR_PAIR(cyan_color));
+      mvwprintw(dev->power_info, 0, 0, "GPUs %3u T-Pow %3u W", num_devices, total_gpu_power);
+    }
 }
 
 
@@ -1258,7 +1259,8 @@ void draw_gpu_info_ncurses(
     struct nvtop_interface *interface) {
 
   draw_devices(dev_info, interface);
-  draw_processes(dev_info, interface);
+  //No need for processes printouts
+  //draw_processes(dev_info, interface);
   if (interface->option_window.state != nvtop_option_state_hidden)
     draw_options(interface);
   draw_option_selection(interface);
