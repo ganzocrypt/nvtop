@@ -571,10 +571,12 @@ static void draw_devices(
     // POWER
     werase(dev->power_info);
     if (IS_VALID(power_draw_valid    , dinfo->valid) &&
-        IS_VALID(power_draw_max_valid, dinfo->valid)) 
-      mvwprintw(dev->power_info, 0, 0,
-          "POW %3u / %3u W - %3u",
-          dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, total_gpu_power + dinfo->power_draw / 1000);
+        IS_VALID(power_draw_max_valid, dinfo->valid)) {
+      mvwprintw(dev->power_info, 0, 0, "POW %3u / %3uW", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000);
+      //Print number of GPUs and their Power Consumption
+      total_gpu_power = total_gpu_power + dinfo->power_draw / 1000;
+      mvwprintw(dev->power_info, 0, 0, "GPUs %3u T-Pow %3u W", num_devices, total_gpu_power);
+    }
     else
       mvwprintw(dev->power_info, 0, 0, "POW N/A W");
       mvwchgat(dev->power_info, 0, 0, 3, 0, cyan_color, NULL);
@@ -615,14 +617,8 @@ static void draw_devices(
 
     wnoutrefresh(dev->pcie_info);
     
-    if (i == num_devices - 1) {
-      wattron(dev->power_info, COLOR_PAIR(cyan_color));
-      mvwprintw(dev->power_info, 0, 0, "GPUs %3u T-Pow %3u W", num_devices, total_gpu_power);
-    }
-  }// end of for loop for gpu devices
-  //Print number of GPUs and their Power Consumption
-
     
+  }// end of for loop for gpu device  
 }
 
 
