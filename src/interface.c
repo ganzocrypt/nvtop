@@ -613,6 +613,7 @@ static void draw_devices(
     
   }// end of for loop for gpu devices
   
+  struct device_window *dev = &interface->devices_win[num_devices];
   //Print number of GPUs and their Power Consumption
   if (dev->device_name == NULL) {
     wattron(dev->name_win, COLOR_PAIR(cyan_color));
