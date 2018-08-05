@@ -505,6 +505,16 @@ static void draw_devices(
       snprintf(buff, 1024, "N/A");
       draw_bare_percentage(dev->mem_util, "MEM-Util", 0, buff);
     }
+    
+    //Print number of GPUs and their Power Consumption
+    werase(dev->power_info);
+    if (IS_VALID(power_draw_valid    , dinfo->valid) && i == (num_devices - 1)) {
+      //calculate the total power draw for the total number of devices
+      total_gpu_power = total_gpu_power + dinfo->power_draw;
+      wattron(dev->power_info, COLOR_PAIR(cyan_color));
+      mvwprintw(dev->power_info, 0, 0, "GPUs %3u T-Pow %3u W", num_devices, total_gpu_power);
+      wnoutrefresh(dev->power_info);
+    }
     /*
     if (IS_VALID(encoder_rate_valid, dinfo->valid)) {
       snprintf(buff, 1024, "%u%%", dinfo->encoder_rate);
@@ -610,15 +620,7 @@ static void draw_devices(
 
     wnoutrefresh(dev->pcie_info);
     
-    //calculate the total power draw for the total number of devices
-    total_gpu_power = total_gpu_power + dinfo->power_draw;
-    //Print number of GPUs and their Power Consumption
-    if (IS_VALID(power_draw_valid    , dinfo->valid) && i == (num_devices - 1)) {
-      wattron(dev->power_info, COLOR_PAIR(cyan_color));
-      mvwprintw(dev->power_info, 0, 0, "Total number of GPUs: %-2u", num_devices);
-      mvwprintw(dev->power_info, 0, 0, "Total Power Consumption: %-2u", total_gpu_power, " Watts");
-      wnoutrefresh(dev->power_info);
-    }
+    
   }// end of for loop for gpu devices
 }
 
