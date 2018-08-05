@@ -573,8 +573,8 @@ static void draw_devices(
     if (IS_VALID(power_draw_valid    , dinfo->valid) &&
         IS_VALID(power_draw_max_valid, dinfo->valid)) 
       mvwprintw(dev->power_info, 0, 0,
-          "POW %3u / %3u W",
-          dinfo->power_draw / 1000, dinfo->power_draw_max / 1000);
+          "POW %3u / %3u W - %3u",
+          dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, total_gpu_power + dinfo->power_draw / 1000);
     else
       mvwprintw(dev->power_info, 0, 0, "POW N/A W");
       mvwchgat(dev->power_info, 0, 0, 3, 0, cyan_color, NULL);
