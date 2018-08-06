@@ -418,7 +418,7 @@ static void draw_bare_percentage(
   wprintw(win, "%s", inside_braces_right);
   if(represent_usage >= 0 && represent_usage <= 40) {
     mvwchgat(win, cury, curx, represent_usage, 0, green_color, NULL);
-  } else if(represent_usage > 40 && represent_usage <= 80 {
+  } else if(represent_usage > 40 && represent_usage <= 80) {
     mvwchgat(win, cury, curx, represent_usage, 0, yellow_color, NULL);
   } else if(represent_usage > 80) {
     mvwchgat(win, cury, curx, represent_usage, 0, red_color, NULL);
