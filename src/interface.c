@@ -434,7 +434,7 @@ static void draw_temp_color(WINDOW *win,
   } else {
     mvwchgat(win, 0, 5, 3, 0, green_color, NULL);
   }
-  mvwchgat(win, 0, 0, 4, 0, cyan_color, NULL);
+  //mvwchgat(win, 0, 0, 4, 0, cyan_color, NULL);
   wnoutrefresh(win);
 }
 
@@ -529,9 +529,7 @@ static void draw_devices(
     */
     if (IS_VALID(gpu_temp_valid         , dinfo->valid) &&
         IS_VALID(gpu_temp_slowdown_valid, dinfo->valid))
-      draw_temp_color(dev->temperature,
-          dinfo->gpu_temp,
-          dinfo->gpu_temp_slowdown);
+      draw_temp_color(dev->temperature, dinfo->gpu_temp, dinfo->gpu_temp_slowdown);
     else {
       mvwprintw(dev->temperature, 0, 0, "TEMP N/A C");
       wnoutrefresh(dev->temperature);
