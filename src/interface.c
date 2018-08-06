@@ -317,7 +317,7 @@ void show_gpu_infos_ascii(
         "GPU %u: %s @ (%uMHz,%uMHz),"
         " Util. (%u%% , %u%%),"
         " FAN %u%%,"
-        " TEMP %u C,"
+        " TEMP %uC,"
         " POWER %uW / %uW\n",
         i,
         dev_info[i].device_name,
@@ -425,7 +425,7 @@ static const char* memory_prefix[] = { "B", "k", "M", "G", "T", "P" };
 static void draw_temp_color(WINDOW *win,
     unsigned int temp,
     unsigned int temp_slowdown) {
-  mvwprintw(win, 0, 0, "TEMP %3uC", temp);
+  mvwprintw(win, 0, 0, "TEMP%3uC", temp);
   if (temp >= temp_slowdown - 5) {
     if (temp >= temp_slowdown)
       mvwchgat(win, 0, 5, 3, 0, red_color, NULL);
@@ -542,15 +542,14 @@ static void draw_devices(
       mvwprintw(dev->fan_speed, 0, 0, "FAN%3u%%", dinfo->fan_speed);
     else
       mvwprintw(dev->fan_speed, 0, 0, "FAN N/A%%");
-    //mvwchgat(dev->fan_speed, 0, 0, 3, 0, cyan_color, NULL);
+    
+    mvwchgat(dev->fan_speed, 0, 0, 3, 0, cyan_color, NULL);
     wnoutrefresh(dev->fan_speed);
 
     // GPU CLOCK
     werase(dev->gpu_clock_info);
     if (IS_VALID(gpu_clock_speed_valid, dinfo->valid))
-      mvwprintw(dev->gpu_clock_info, 0, 0,
-          "GPU %uMHz",
-          dinfo->gpu_clock_speed);
+      mvwprintw(dev->gpu_clock_info, 0, 0, "GPU %uMHz", dinfo->gpu_clock_speed);
     else
       mvwprintw(dev->gpu_clock_info, 0, 0, "GPU N/A MHz");
 
