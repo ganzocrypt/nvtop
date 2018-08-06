@@ -416,7 +416,13 @@ static void draw_bare_percentage(
   unsigned int right_side_braces_space_required = strlen(inside_braces_right);
   wmove(win, cury, curx + between_sbraces - right_side_braces_space_required);
   wprintw(win, "%s", inside_braces_right);
-  mvwchgat(win, cury, curx, represent_usage, 0, green_color, NULL);
+  if(represent_usage >= 0 && represent_usage <= 40) {
+    mvwchgat(win, cury, curx, represent_usage, 0, green_color, NULL);
+  } else if(represent_usage > 40 && represent_usage <= 80 {
+    mvwchgat(win, cury, curx, represent_usage, 0, yellow_color, NULL);
+  } else if(represent_usage > 80) {
+    mvwchgat(win, cury, curx, represent_usage, 0, red_color, NULL);
+  }
   wnoutrefresh(win);
 }
 
@@ -434,7 +440,7 @@ static void draw_temp_color(WINDOW *win,
   } else {
     mvwchgat(win, 0, 5, 3, 0, green_color, NULL);
   }
-  //mvwchgat(win, 0, 0, 4, 0, cyan_color, NULL);
+  mvwchgat(win, 0, 0, 4, 0, cyan_color, NULL);
   wnoutrefresh(win);
 }
 
