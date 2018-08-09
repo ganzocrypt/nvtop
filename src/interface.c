@@ -107,7 +107,7 @@ static unsigned int sizeof_device_field[] = {
   [device_name] = 11,
   [device_fan_speed] = 7,
   [device_temperature] = 8,
-  [device_power] = 16,
+  [device_power] = 17,
   [device_clock] = 11,
   [device_pcie] = 44,
 };
@@ -601,7 +601,7 @@ static void draw_devices(
         IS_VALID(power_draw_max_valid, dinfo->valid)) {
       //Print number of GPUs and their Power Consumption
       total_gpu_power = total_gpu_power + dinfo->power_draw / 1000;
-      mvwprintw(dev->power_info, 0, 0, "POW%3u/%3u/%4uW", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, total_gpu_power);
+      mvwprintw(dev->power_info, 0, 0, "POW %3u/%3u/%4uW", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, total_gpu_power);
       
       //mvwprintw(dev->power_info, 0, 0, "TPOW %3uW", total_gpu_power);
     }
