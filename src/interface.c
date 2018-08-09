@@ -37,7 +37,6 @@ enum interface_color {
   yellow_color,
   blue_color,
   magenta_color,
-  white_color,
 };
 
 struct device_window {
@@ -546,11 +545,24 @@ static void draw_devices(
     }
     */
     if (IS_VALID(gpu_temp_valid         , dinfo->valid) &&
-        IS_VALID(gpu_temp_slowdown_valid, dinfo->valid))
-      draw_temp_color(dev->temperature, dinfo->gpu_temp, dinfo->gpu_temp_slowdown, dinfo->fan_speed);
-    else {
+        IS_VALID(gpu_temp_slowdown_valid, dinfo->valid)) {
+      //draw_temp_color(dev->temperature, dinfo->gpu_temp, dinfo->gpu_temp_slowdown, dinfo->fan_speed);
+      
+      mvwprintw(dev->temperature, 0, 0, "TEMP%3uC", dinfo->gpu_temp);
+
+      //set different color if Temp increases
+      if(dinfo->gpu_temp >= dinfo->fan_speed) {
+        mvwchgat(dev->temperature, 0, 5, 3, 0, red_color, NULL);
+      } else if(dinfo->gpu_temp >= dinfo->fan_speed - 10) {
+        mvwchgat(dev->temperature, 0, 5, 3, 0, yellow_color, NULL);
+      } //else {
+        //mvwchgat(dev->temperature, 0, 5, 3, 0, white_color, NULL);
+      //}
+    
+    } else {
       mvwprintw(dev->temperature, 0, 0, "TEMP N/A C");
     }
+    mvwchgat(dev->temperature, 0, 0, 4, 0, cyan_color, NULL);
     wnoutrefresh(dev->temperature);
 
     // FAN
