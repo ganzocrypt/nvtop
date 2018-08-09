@@ -430,7 +430,7 @@ static const char* memory_prefix[] = { "B", "k", "M", "G", "T", "P" };
 
 static void draw_temp_color(WINDOW *win,
     unsigned int temp,
-    unsigned int temp_slowdown) {
+    unsigned int temp_slowdown, dev, dinfo) {
   mvwprintw(win, 0, 0, "TEMP%3uC", temp);
   
   if(temp >= dinfo->fan_speed) {
@@ -542,7 +542,7 @@ static void draw_devices(
     */
     if (IS_VALID(gpu_temp_valid         , dinfo->valid) &&
         IS_VALID(gpu_temp_slowdown_valid, dinfo->valid))
-      draw_temp_color(dev->temperature, dinfo->gpu_temp, dinfo->gpu_temp_slowdown);
+      draw_temp_color(dev->temperature, dinfo->gpu_temp, dinfo->gpu_temp_slowdown, dev, dinfo);
     else {
       mvwprintw(dev->temperature, 0, 0, "TEMP N/A C");
       wnoutrefresh(dev->temperature);
