@@ -441,7 +441,7 @@ static void draw_temp_color(WINDOW *win,
   } else if(temp >= fan_speed - 10) {
     mvwchgat(win, 0, 5, 3, 0, yellow_color, NULL);
   } else {
-    mvwchgat(win, 0, 5, 3, 0, , NULL);
+    mvwchgat(win, 0, 5, 3, 0, magenta_color, NULL);
   }
   /*
   if (temp >= temp_slowdown - 5) {
