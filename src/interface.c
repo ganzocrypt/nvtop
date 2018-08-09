@@ -37,6 +37,7 @@ enum interface_color {
   yellow_color,
   blue_color,
   magenta_color,
+  white_color,
 };
 
 struct device_window {
@@ -434,7 +435,7 @@ static void draw_temp_color(WINDOW *win,
     unsigned int temp_slowdown, unsigned int fan_speed) {
   mvwprintw(win, 0, 0, "TEMP%3uC", temp);
   
-  
+  mvwprintw(dev->fan_speed, 0, 0, "FAN%3u%%", dinfo->fan_speed);
   //set different color if Temp increases
   if(temp >= fan_speed) {
     mvwchgat(win, 0, 5, 3, 0, red_color, NULL);
