@@ -606,7 +606,7 @@ static void draw_devices(
       
       //If power is great than MAX set from OverClocking show RED text
       if(dinfo->power_draw >= dinfo->power_draw_max-50) {
-        mvwchgat(dev->power_info, 0, 0, 3, 0, red_color, NULL);
+        mvwchgat(dinfo->power_draw, 0, 0, 3, 0, red_color, NULL);
       }
       //mvwprintw(dev->power_info, 0, 0, "TPOW %3uW", total_gpu_power);
     }
