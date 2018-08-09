@@ -105,9 +105,9 @@ enum device_field {
 
 static unsigned int sizeof_device_field[] = {
   [device_name] = 11,
-  [device_fan_speed] = 8,
-  [device_temperature] = 10,
-  [device_power] = 15,
+  [device_fan_speed] = 7,
+  [device_temperature] = 8,
+  [device_power] = 16,
   [device_clock] = 11,
   [device_pcie] = 44,
 };
