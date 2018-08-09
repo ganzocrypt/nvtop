@@ -552,9 +552,9 @@ static void draw_devices(
 
       //set different color if Temp increases
       if(dinfo->gpu_temp >= dinfo->fan_speed) {
-        mvwchgat(dev->temperature, 0, 5, 3, 0, red_color, NULL);
+        mvwchgat(dev->temperature, 0, 5, 2, 0, red_color, NULL);
       } else if(dinfo->gpu_temp >= dinfo->fan_speed - 10) {
-        mvwchgat(dev->temperature, 0, 5, 3, 0, yellow_color, NULL);
+        mvwchgat(dev->temperature, 0, 5, 2, 0, yellow_color, NULL);
       } //else {
         //mvwchgat(dev->temperature, 0, 5, 3, 0, white_color, NULL);
       //}
@@ -606,7 +606,7 @@ static void draw_devices(
       
       //If power is great than MAX set from OverClocking show RED text
       if(dinfo->power_draw >= dinfo->power_draw_max-50) {
-        mvwchgat(dinfo->power_draw, 0, 0, 3, 0, red_color, NULL);
+        mvwchgat(dev->power_info, 0, 4, 3, 0, red_color, NULL);
       }
       //mvwprintw(dev->power_info, 0, 0, "TPOW %3uW", total_gpu_power);
     }
