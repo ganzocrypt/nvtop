@@ -604,8 +604,8 @@ static void draw_devices(
       
       mvwprintw(dev->power_info, 0, 0, "POW %3u/%3u/%4uW", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, total_gpu_power);
       
-      //If power is great than MAX set from OverClocking show RED text, if 10% less show yellow
-      if((dinfo->power_draw/1000) >= (dinfo->power_draw_max/1000 - dinfo->power_draw_max/1000*0.1) && (dinfo->power_draw/1000) < (dinfo->power_draw_max/1000)) {
+      //If power is great than MAX set from OverClocking show RED text, if 15 Watts less show yellow
+      if((dinfo->power_draw/1000) >= (dinfo->power_draw_/1000 - 15) && (dinfo->power_draw/1000) < dinfo->power_draw_max/1000) {
         mvwchgat(dev->power_info, 0, 4, 3, 0, red_color, NULL);
       } else if((dinfo->power_draw/1000) >= (dinfo->power_draw_max/1000)) {
         mvwchgat(dev->power_info, 0, 4, 3, 0, yellow_color, NULL);
