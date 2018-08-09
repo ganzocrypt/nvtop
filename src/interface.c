@@ -441,7 +441,7 @@ static void draw_temp_color(WINDOW *win,
   } else if(temp >= fan_speed - 10) {
     mvwchgat(win, 0, 5, 3, 0, yellow_color, NULL);
   } else {
-    mvwchgat(win, 0, 5, 3, 0, blue_color, NULL);
+    mvwchgat(win, 0, 5, 3, 0, , NULL);
   }
   /*
   if (temp >= temp_slowdown - 5) {
@@ -453,7 +453,7 @@ static void draw_temp_color(WINDOW *win,
     mvwchgat(win, 0, 5, 3, 0, green_color, NULL);
   }*/
   mvwchgat(win, 0, 0, 4, 0, cyan_color, NULL);
-  wnoutrefresh(win);
+  //wnoutrefresh(win);
 }
 
 static void print_pcie_at_scale(WINDOW *win, unsigned int value) {
@@ -550,8 +550,8 @@ static void draw_devices(
       draw_temp_color(dev->temperature, dinfo->gpu_temp, dinfo->gpu_temp_slowdown, dinfo->fan_speed);
     else {
       mvwprintw(dev->temperature, 0, 0, "TEMP N/A C");
-      wnoutrefresh(dev->temperature);
     }
+    wnoutrefresh(dev->temperature);
 
     // FAN
     if (IS_VALID(fan_speed_valid, dinfo->valid))
