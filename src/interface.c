@@ -479,7 +479,7 @@ static void draw_devices(
 
   unsigned int num_devices = interface->num_devices;
   unsigned int total_gpu_power = 0;
-  unsigned int percentage_gpu_power;
+  double percentage_gpu_power;
   
   for (unsigned int i = 0; i < num_devices; ++i) {
     struct device_window *dev = &interface->devices_win[i];
