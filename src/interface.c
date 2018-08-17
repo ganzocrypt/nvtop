@@ -107,7 +107,7 @@ static unsigned int sizeof_device_field[] = {
   [device_name] = 11,
   [device_fan_speed] = 7,
   [device_temperature] = 8,
-  [device_power] = 17,
+  [device_power] = 21,
   [device_clock] = 11,
   [device_pcie] = 44,
 };
@@ -328,7 +328,8 @@ void show_gpu_infos_ascii(
         dev_info[i].fan_speed,
         dev_info[i].gpu_temp,
         dev_info[i].power_draw/1000,
-        dev_info[i].power_draw_max/1000);
+        dev_info[i].power_draw_max/1000,
+        dev_info[i].power_draw_max_card/1000);
   }
 }
 
@@ -602,7 +603,7 @@ static void draw_devices(
       //Print number of GPUs and their Power Consumption
       total_gpu_power = total_gpu_power + dinfo->power_draw / 1000;
       
-      mvwprintw(dev->power_info, 0, 0, "POW %3u/%3u/%4uW", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, total_gpu_power);
+      mvwprintw(dev->power_info, 0, 0, "POW %3u/%3u/%3u/%4uW", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, dinfo->power_draw_max_card / 1000, total_gpu_power);
       
       //If power is great than MAX set from OverClocking show RED text, if 15 Watts less show yellow
       if((dinfo->power_draw/1000) >= (dinfo->power_draw_max/1000 - 15) && (dinfo->power_draw/1000) < dinfo->power_draw_max/1000) {
