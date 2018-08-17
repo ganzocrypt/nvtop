@@ -65,6 +65,7 @@ enum dev_info_valid {
   gpu_temp_shutdown_valid,
   power_draw_valid,
   power_draw_max_valid,
+  power_draw_max_card_valid,
   valid_max_val,
 };
 
@@ -96,6 +97,7 @@ struct device_info {
   unsigned int gpu_temp_shutdown;    // GPU temperature °c
   unsigned int power_draw;           // Power usage in milliwatts
   unsigned int power_draw_max;       // Max power usage in milliwatts
+  unsigned int power_draw_max_card;  // Max power handled by the card in milliwatts
   unsigned int size_proc_buffers;    // Number of Compute processes (Cuda)
   unsigned int num_compute_procs;    // Number of Compute processes (Cuda)
   unsigned int num_graphical_procs;  // Number of Graphical processes
