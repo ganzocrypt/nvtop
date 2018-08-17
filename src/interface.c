@@ -107,7 +107,7 @@ static unsigned int sizeof_device_field[] = {
   [device_name] = 11,
   [device_fan_speed] = 7,
   [device_temperature] = 8,
-  [device_power] = 26,
+  [device_power] = 27,
   [device_clock] = 11,
   [device_pcie] = 44,
 };
@@ -479,7 +479,7 @@ static void draw_devices(
 
   unsigned int num_devices = interface->num_devices;
   unsigned int total_gpu_power = 0;
-  double percentage_gpu_power = 0;
+  unsigned int percentage_gpu_power = 0;
   
   for (unsigned int i = 0; i < num_devices; ++i) {
     struct device_window *dev = &interface->devices_win[i];
