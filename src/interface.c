@@ -107,7 +107,7 @@ static unsigned int sizeof_device_field[] = {
   [device_name] = 11,
   [device_fan_speed] = 7,
   [device_temperature] = 8,
-  [device_power] = 21,
+  [device_power] = 26,
   [device_clock] = 11,
   [device_pcie] = 44,
 };
@@ -479,6 +479,7 @@ static void draw_devices(
 
   unsigned int num_devices = interface->num_devices;
   unsigned int total_gpu_power = 0;
+  unsigned int percentage_gpu_power = 0;
   
   for (unsigned int i = 0; i < num_devices; ++i) {
     struct device_window *dev = &interface->devices_win[i];
@@ -601,8 +602,10 @@ static void draw_devices(
         IS_VALID(power_draw_max_valid, dinfo->valid)) {
       //Print number of GPUs and their Power Consumption
       total_gpu_power = total_gpu_power + dinfo->power_draw / 1000;
-      
-      mvwprintw(dev->power_info, 0, 0, "POW %3u/%3u/%3u/%4uW", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, dinfo->power_draw_max_card / 1000, total_gpu_power);
+      //Percentage of power set from OverClocking
+      percentage_gpu_power = (dinfo->power_draw_max / dinfo->power_draw_max_card) * 100;
+      //Print
+      mvwprintw(dev->power_info, 0, 0, "POW@%3u% %3u/%3u/%3u/%4uW", percentage_gpu_power / 1000, dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, dinfo->power_draw_max_card / 1000, total_gpu_power);
       
       //If power is great than MAX set from OverClocking show RED text, if 15 Watts less show yellow
       if((dinfo->power_draw/1000) >= (dinfo->power_draw_max/1000 - 15) && (dinfo->power_draw/1000) < dinfo->power_draw_max/1000) {
