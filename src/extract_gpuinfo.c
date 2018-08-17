@@ -379,7 +379,7 @@ void update_device_infos(
     }
     
     // POWER: MAX power handled by the card
-    retval = nvmlDeviceGetPowerManagementLimit(
+    retval = nvmlDeviceGetPowerManagementDefaultLimit(
         curr_dev_info->device_handle,
         &curr_dev_info->power_draw_max_card);
     SET_VALID(power_draw_max_card_valid, curr_dev_info->valid);
