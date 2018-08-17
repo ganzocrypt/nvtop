@@ -479,7 +479,7 @@ static void draw_devices(
 
   unsigned int num_devices = interface->num_devices;
   unsigned int total_gpu_power = 0;
-  unsigned int percentage_gpu_power = 0;
+  unsigned int percentage_gpu_power;
   
   for (unsigned int i = 0; i < num_devices; ++i) {
     struct device_window *dev = &interface->devices_win[i];
@@ -603,9 +603,9 @@ static void draw_devices(
       //Print number of GPUs and their Power Consumption
       total_gpu_power = total_gpu_power + dinfo->power_draw / 1000;
       //Percentage of power set from OverClocking
-      //percentage_gpu_power = ((dinfo->power_draw_max/1000) / (dinfo->power_draw_max_card/1000)) * 100;
+      percentage_gpu_power = ((dinfo->power_draw_max/1000) / (dinfo->power_draw_max_card/1000)) * 100;
       //Print
-      mvwprintw(dev->power_info, 0, 0, "POW %3u/%3u/%3u/%4uW @%3u%%", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, dinfo->power_draw_max_card / 1000, total_gpu_power, ((dinfo->power_draw_max/1000) / (dinfo->power_draw_max_card/1000)) * 100);
+      mvwprintw(dev->power_info, 0, 0, "POW %3u/%3u/%3u/%4uW @%3u%%", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, dinfo->power_draw_max_card / 1000, total_gpu_power, percentage_gpu_power);
       
       //If power is great than MAX set from OverClocking show RED text, if 15 Watts less show yellow
       if((dinfo->power_draw/1000) >= (dinfo->power_draw_max/1000 - 15) && (dinfo->power_draw/1000) < dinfo->power_draw_max/1000) {
