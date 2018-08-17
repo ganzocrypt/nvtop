@@ -328,8 +328,7 @@ void show_gpu_infos_ascii(
         dev_info[i].fan_speed,
         dev_info[i].gpu_temp,
         dev_info[i].power_draw/1000,
-        dev_info[i].power_draw_max/1000,
-        dev_info[i].power_draw_max_card/1000);
+        dev_info[i].power_draw_max/1000);
   }
 }
 
