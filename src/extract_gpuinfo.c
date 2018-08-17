@@ -377,7 +377,17 @@ void update_device_infos(
       curr_dev_info->power_draw_max = 0;
       RESET_VALID(power_draw_max_valid, curr_dev_info->valid);
     }
-
+    
+    // POWER: MAX power handled by the card
+    retval = nvmlDeviceGetPowerManagementLimit(
+        curr_dev_info->device_handle,
+        &curr_dev_info->power_draw_max_card);
+    SET_VALID(power_draw_max_card_valid, curr_dev_info->valid);
+    if (retval != NVML_SUCCESS) {
+      curr_dev_info->power_draw_max_card = 0;
+      RESET_VALID(power_draw_max_card_valid, curr_dev_info->valid);
+    }
+    
     // Encoder infos
     retval = nvmlDeviceGetEncoderUtilization(
         curr_dev_info->device_handle,
