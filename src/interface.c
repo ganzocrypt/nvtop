@@ -603,7 +603,7 @@ static void draw_devices(
       //Print number of GPUs and their Power Consumption
       total_gpu_power = total_gpu_power + dinfo->power_draw / 1000;
       //Percentage of power set from OverClocking
-      percentage_gpu_power = ((double)dinfo->power_draw_max/1000)/(double)dinfo->power_draw_max_card/1000))*100;
+      percentage_gpu_power = (((double)dinfo->power_draw_max/1000)/((double)dinfo->power_draw_max_card/1000))*100;
       //Print
       mvwprintw(dev->power_info, 0, 0, "POW %3u/%3u/%3u/%4uW @%3u%%", dinfo->power_draw / 1000, dinfo->power_draw_max / 1000, dinfo->power_draw_max_card / 1000, total_gpu_power, percentage_gpu_power);
       
