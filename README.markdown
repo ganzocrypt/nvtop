@@ -102,7 +102,7 @@ Two libraries are required:
 ## NVTOP Build
 
 ```bash
-git clone https://github.com/Syllo/nvtop.git
+git clone https://github.com/ganzocrypt/nvtop.git
 mkdir -p nvtop/build && cd nvtop/build
 cmake ..
 
