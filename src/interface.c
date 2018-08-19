@@ -617,7 +617,14 @@ static void draw_devices(
       } else if((dinfo->power_draw/1000) >= (dinfo->power_draw_max/1000)) {
         mvwchgat(dev->power_info, 0, 4, 3, 0, red_color, NULL);
       }
-      //mvwprintw(dev->power_info, 0, 0, "TPOW %3uW", total_gpu_power);
+      // If the % power draw is less than power set - 5 watts make it yellow text
+      // else if power draw is more than power set make it red text
+      if(percentage_gpu_power_draw <= percentage_gpu_power - 5) {
+        mvwchgat(dev->power_info, 0, 24, 3, 0, yellow_color, NULL);
+      } else if(percentage_gpu_power_draw > percentage_gpu_power) {
+        mvwchgat(dev->power_info, 0, 24, 3, 0, red_color, NULL);
+      }
+      
     }
     else
       mvwprintw(dev->power_info, 0, 0, "POW N/A W");
