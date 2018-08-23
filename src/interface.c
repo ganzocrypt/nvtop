@@ -579,7 +579,7 @@ static void draw_devices(
     // GPU CLOCK
     werase(dev->gpu_clock_info);
     if (IS_VALID(gpu_clock_speed_valid, dinfo->valid))
-      mvwprintw(dev->gpu_clock_info, 0, 0, "GPU %u/%uMHz", dinfo->gpu_clock_speed, dev_info->gpu_clock_speed_max);
+      mvwprintw(dev->gpu_clock_info, 0, 0, "GPU %u/%uMHz", dinfo->gpu_clock_speed, dinfo->gpu_clock_speed_max);
     else
       mvwprintw(dev->gpu_clock_info, 0, 0, "GPU N/A MHz");
 
@@ -589,9 +589,7 @@ static void draw_devices(
     // MEM CLOCK
     werase(dev->mem_clock_info);
     if (IS_VALID(mem_clock_speed_valid, dinfo->valid))
-      mvwprintw(dev->mem_clock_info, 0, 0,
-          "MEM %uMHz",
-          dinfo->mem_clock_speed);
+      mvwprintw(dev->mem_clock_info, 0, 0, "MEM %u/%uMHz", dinfo->mem_clock_speed, dinfo->mem_clock_speed_max);
     else
       mvwprintw(dev->mem_clock_info, 0, 0, "MEM N/A MHz");
     mvwchgat(dev->mem_clock_info, 0, 0, 3, 0, cyan_color, NULL);
