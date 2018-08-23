@@ -108,7 +108,7 @@ static unsigned int sizeof_device_field[] = {
   [device_fan_speed] = 7,
   [device_temperature] = 8,
   [device_power] = 31,
-  [device_clock] = 11,
+  [device_clock] = 16,
   [device_pcie] = 44,
 };
 
@@ -579,7 +579,7 @@ static void draw_devices(
     // GPU CLOCK
     werase(dev->gpu_clock_info);
     if (IS_VALID(gpu_clock_speed_valid, dinfo->valid))
-      mvwprintw(dev->gpu_clock_info, 0, 0, "GPU %uMHz", dinfo->gpu_clock_speed);
+      mvwprintw(dev->gpu_clock_info, 0, 0, "GPU %u/%uMHz", dinfo->gpu_clock_speed, dev_info->gpu_clock_speed_max);
     else
       mvwprintw(dev->gpu_clock_info, 0, 0, "GPU N/A MHz");
 
