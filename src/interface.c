@@ -581,8 +581,8 @@ static void draw_devices(
     if (IS_VALID(gpu_clock_speed_valid, dinfo->valid)) {
       mvwprintw(dev->gpu_clock_info, 0, 0, "GPU %u/%uMHz", dinfo->gpu_clock_speed, dinfo->gpu_clock_speed_max);
       //Change text color if limits are passed
-      if(dinfo->gpu_clock_speed >=  dinfo->gpu_clock_speed_max - 200 && dinfo->gpu_clock_speed <= dinfo->gpu_clock_speed_max - 100) {
-        //If the GPU core clock is between 200 and 100 Mhz less than MAX GPU Mhz set text yellow 
+      if(dinfo->gpu_clock_speed >=  dinfo->gpu_clock_speed_max - 200) {
+        //If the GPU core clock is 200 Mhz less than MAX GPU Mhz set text yellow 
         mvwchgat(dev->gpu_clock_info, 0, 4, 4, 0, yellow_color, NULL);
       } else if(dinfo->gpu_clock_speed >  dinfo->gpu_clock_speed_max) {
         //If the GPU clock is above than MAX GPU Mhz set text red 
@@ -599,8 +599,8 @@ static void draw_devices(
     if (IS_VALID(mem_clock_speed_valid, dinfo->valid)) {
       mvwprintw(dev->mem_clock_info, 0, 0, "MEM %u/%uMHz", dinfo->mem_clock_speed, dinfo->mem_clock_speed_max);
       //Change text color if limits are passed
-      if(dinfo->mem_clock_speed >=  dinfo->mem_clock_speed_max - 200 && dinfo->mem_clock_speed <= dinfo->mem_clock_speed_max - 100) {
-        //If the GPU memory clock is between 200 and 100 Mhz less than MAX GPU Mhz set text yellow 
+      if(dinfo->mem_clock_speed >=  dinfo->mem_clock_speed_max - 200) {
+        //If the GPU memory clock is 200 Mhz less than MAX GPU Mhz set text yellow 
         mvwchgat(dev->mem_clock_info, 0, 4, 4, 0, yellow_color, NULL);
       } else if(dinfo->mem_clock_speed >  dinfo->mem_clock_speed_max) {
         //If the GPU clock is above than MAX GPU Mhz set text red 
