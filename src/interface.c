@@ -117,7 +117,7 @@ static unsigned int sizeof_process_field[] = {
   [process_user] = 4,
   [process_gpu_id] = 3,
   [process_type] = 7,
-  [process_memory] = 14,
+  [process_memory] = 18,
   [process_command] = 0,
 };
 
@@ -514,7 +514,7 @@ static void draw_devices(
         total_mem /= 1000;
         used_mem /= 1000;
       }
-      snprintf(buff, 1024, "%.1f%s/%.1f%s",
+      snprintf(buff, 1024, "%.3f%s/%.3f%s",
           used_mem,  memory_prefix[prefix_off],
           total_mem, memory_prefix[prefix_off]);
       draw_bare_percentage(dev->mem_util, "MEM-Util",
